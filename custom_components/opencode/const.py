@@ -16,7 +16,7 @@ DEFAULT_BASE_URL = "https://opencode.ai/zen/v1"
 # Model families on OpenCode Zen that are NOT served through the OpenAI
 # Chat Completions endpoint (`/chat/completions`). We filter these out of the
 # model picker because v1 only speaks the OpenAI-compatible protocol.
-EXCLUDED_MODEL_PREFIXES = ("gpt-", "grok-", "claude-", "qwen-", "gemini-")
+EXCLUDED_MODEL_PREFIXES = ("gpt-", "grok-", "claude-", "qwen", "gemini-")
 
 RECOMMENDED_CONVERSATION_OPTIONS = {
     CONF_RECOMMENDED: True,

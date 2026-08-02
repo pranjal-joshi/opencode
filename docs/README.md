@@ -19,7 +19,19 @@ by GitHub Pages at **https://pranjal-joshi.github.io/opencode/**.
 | `usage.html` | Chat, voice, and automation usage |
 | `faq.html` | Frequently asked questions |
 | `404.html` | Error page |
+| `models.json` | OpenCode Zen model list, generated from the Zen API |
+| `models.js` | Renders the "Supported models" table from `models.json` |
 | `assets/style.css` | Shared dark NeuraMesh theme |
+
+## Supported models table
+
+The model table on `index.html` is **not hardcoded**. A scheduled GitHub Action
+(`.github/workflows/models.yml`, daily at 02:17 UTC) runs
+`scripts/generate_models.py`, which fetches
+`https://opencode.ai/zen/v1/models`, classifies each model by family and
+protocol, and commits the result to `docs/models.json`. The page loads that
+file and renders it client-side. Run `python3 scripts/generate_models.py`
+locally to refresh it by hand.
 
 ## Theme
 

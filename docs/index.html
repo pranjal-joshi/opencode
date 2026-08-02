@@ -93,26 +93,22 @@
   <section>
     <div class="container">
       <h2 class="section-title">Supported models</h2>
-      <p class="section-sub">v1 supports all models served through the OpenAI Chat Completions protocol. GPT, Claude, Qwen, Gemini, and Grok families are planned for future releases.</p>
+      <p class="section-sub">The full OpenCode Zen catalog, pulled live from <a href="https://opencode.ai/zen/v1/models" target="_blank" rel="noopener">the Zen models API</a>. v1 of this integration supports models served through the OpenAI Chat Completions protocol (<span class="accent">✅ Supported</span>); the rest are planned for future releases.</p>
       <div class="table-wrap">
-        <table>
+        <table id="models-table">
           <thead>
-            <tr><th>Family</th><th>Examples</th><th>Status</th></tr>
+            <tr><th>Family</th><th>Models</th><th>Status</th></tr>
           </thead>
-          <tbody>
-            <tr><td>DeepSeek</td><td><code>deepseek-v4-flash</code>, <code>deepseek-v4-pro</code></td><td class="accent">✅ Supported</td></tr>
-            <tr><td>MiniMax</td><td><code>minimax-m3</code>, <code>minimax-m2.7</code></td><td class="accent">✅ Supported</td></tr>
-            <tr><td>GLM</td><td><code>glm-5</code>, <code>glm-5.2</code></td><td class="accent">✅ Supported</td></tr>
-            <tr><td>Kimi</td><td><code>kimi-k2.5</code>, <code>kimi-k3</code></td><td class="accent">✅ Supported</td></tr>
-            <tr><td>Free models</td><td><code>deepseek-v4-flash-free</code>, <code>nemotron-3-ultra-free</code></td><td class="accent">✅ Supported</td></tr>
-            <tr><td>GPT</td><td><code>gpt-5.6-sol</code> …</td><td class="gold">⏳ Planned</td></tr>
-            <tr><td>Claude / Qwen</td><td><code>claude-sonnet-5</code> …</td><td class="gold">⏳ Planned</td></tr>
-            <tr><td>Gemini</td><td><code>gemini-3.5-flash</code> …</td><td class="gold">⏳ Planned</td></tr>
+          <tbody id="models-body">
+            <tr><td colspan="3">Loading model list…</td></tr>
           </tbody>
         </table>
       </div>
+      <p class="section-sub muted" id="models-fetch-info"></p>
     </div>
   </section>
+
+  <script src="models.js"></script>
 
   <footer>
     <p><a href="index.html">OpenCode</a> · a community HACS integration · <a href="https://github.com/pranjal-joshi/opencode" target="_blank" rel="noopener">Source</a> · MIT License</p>

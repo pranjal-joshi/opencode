@@ -1,0 +1,32 @@
+name: Refresh models
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 2 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    name: Fetch OpenCode Zen models
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Fetch models and write docs/models.json
+        run: python3 scripts/generate_models.py
+
+      - name: Commit updated model list
+        run: |
+          if git diff --quiet docs/models.json; then
+            echo "models.json is up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/models.json
+          git commit -m "docs: refresh OpenCode Zen model list"
+          git push

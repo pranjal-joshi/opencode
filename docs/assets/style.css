@@ -380,3 +380,21 @@ footer a {
 .muted { color: var(--on-muted); }
 .accent { color: var(--primary); }
 .gold { color: var(--gold); }
+
+/* ---------- Model chips ---------- */
+.chip {
+  display: inline-block;
+  background: rgba(78, 222, 163, 0.08);
+  border: 1px solid rgba(78, 222, 163, 0.22);
+  border-radius: 6px;
+  padding: 2px 8px;
+  margin: 2px 4px 2px 0;
+  font-size: 0.82rem;
+  color: var(--primary);
+}
+
+.chip-free {
+  background: rgba(233, 195, 73, 0.08);
+  border-color: rgba(233, 195, 73, 0.25);
+  color: var(--gold);
+}
