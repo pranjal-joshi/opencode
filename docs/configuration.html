@@ -78,8 +78,24 @@
       <h2>Adding more agents</h2>
       <p>Repeat Step 2 to add as many agents as you like — one per model. Each gets its own device and can be selected independently in Assist, dashboards, and automations.</p>
 
+      <h2>Step 3 — Add an AI task</h2>
+      <ol class="steps">
+        <li>
+          <h3>Open the OpenCode entry</h3>
+          <p>Click the <strong>OpenCode Zen</strong> card in Devices &amp; Services.</p>
+        </li>
+        <li>
+          <h3>Add AI task</h3>
+          <p>Click <strong>Add AI task</strong> and pick a model for structured data generation.</p>
+        </li>
+        <li>
+          <h3>Save</h3>
+          <p>The task appears as <code>ai_task.&lt;model&gt;</code> and can be used from automations and scripts via the <code>ai_task.generate_data</code> service.</p>
+        </li>
+      </ol>
+
       <h2>Reconfiguring</h2>
-      <p>On the OpenCode entry card, select a conversation agent and choose <strong>Reconfigure</strong> to change its model, instructions, or Home Assistant control.</p>
+      <p>On the OpenCode entry card, select a conversation agent and choose <strong>Reconfigure</strong> to change its model, instructions, or Home Assistant control. AI tasks can be reconfigured the same way to change the model.</p>
 
       <div class="note">
         Model lists are fetched live from OpenCode Zen, so newly released OpenAI-compatible models appear automatically in the dropdown.

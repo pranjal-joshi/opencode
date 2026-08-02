@@ -60,6 +60,24 @@
       <h2>Attachments</h2>
       <p>When using the conversation UI or the Assist dialog, you can attach images and PDFs. They are base64-encoded and sent to the model.</p>
 
+      <h2>AI tasks</h2>
+      <p>AI tasks generate structured data on demand using the <code>ai_task.generate_data</code> service. The task name is passed to the model so it knows what to produce. Example:</p>
+      <pre><code><span class="k">action</span>:
+  <span class="k">- service</span>: <span class="n">ai_task.generate_data</span>
+    <span class="k">data</span>:
+      <span class="k">task_name</span>: <span class="s">"Generate a summary"</span>
+      <span class="k">entity_id</span>: <span class="s">ai_task.deepseek_v4_flash</span>
+      <span class="k">instructions</span>: <span class="s">"Summarize today's events."</span></code></pre>
+      <p>Pass a <code>structure</code> to get a JSON response conforming to a schema (e.g. fields with selectors) instead of plain text. You can also attach files:</p>
+      <pre><code><span class="k">action</span>:
+  <span class="k">- service</span>: <span class="n">ai_task.generate_data</span>
+    <span class="k">data</span>:
+      <span class="k">task_name</span>: <span class="s">"Extract characters"</span>
+      <span class="k">entity_id</span>: <span class="s">ai_task.deepseek_v4_flash</span>
+      <span class="k">instructions</span>: <span class="s">"Extract the named characters from the image."</span>
+      <span class="k">attachments</span>:
+        <span class="k">- media_content_id</span>: <span class="s">media-source://media/doorbell_snapshot.jpg</span></code></pre>
+
       <h2>Example: switch models per automation</h2>
       <pre><code><span class="k">action</span>:
   <span class="k">- service</span>: <span class="n">conversation.process</span>

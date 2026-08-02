@@ -27,6 +27,7 @@ existing OpenCode Zen API key.
 ## Features
 
 - 🤖 **Conversation Agent** — Add unlimited agents, one per model, via config subentries
+- ⚙️ **AI Tasks** — Generate structured data on demand via the `ai_task.generate_data` service
 - 🎤 **Voice Pipeline Ready** — Works with Assist and the voice pipeline
 - 🏠 **Home Assistant Control** — Let the model call tools to control devices & entities
 - 📎 **Attachments** — Send images/PDFs with your message
@@ -55,6 +56,7 @@ existing OpenCode Zen API key.
 2. Go to **Settings → Devices & Services → Add Integration → OpenCode**
 3. Enter your API key (optionally override the Zen endpoint)
 4. Click **Add conversation agent**, pick a model, and you're done
+5. (Optional) Click **Add AI task**, pick a model for structured data generation
 
 Full instructions: [https://pranjal-joshi.github.io/opencode/](https://pranjal-joshi.github.io/opencode/)
 
