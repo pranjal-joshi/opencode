@@ -1,6 +1,6 @@
 # OpenCode for Home Assistant
 
-![Icon](custom_components/opencode/brand/logo.svg)
+![Icon](custom_components/opencode/brand/logo.png)
 
 ![GitHub Release](https://img.shields.io/github/v/release/pranjal-joshi/opencode?style=for-the-badge&logo=github&logoColor=white&label=RELEASE&color=10B981)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/pranjal-joshi/opencode/total?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=2341BDF5&label=HACS%20Downloads&color=341BDF5)
