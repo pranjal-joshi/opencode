@@ -14,13 +14,6 @@
     return div.innerHTML;
   }
 
-  function statusCell(model) {
-    if (model.openai_compatible) {
-      return '<td class="accent">✅ Supported</td>';
-    }
-    return '<td class="gold">⏳ Planned</td>';
-  }
-
   function modelChips(models) {
     return models
       .map(function (m) {
@@ -49,15 +42,8 @@
       var models = groups[family].sort(function (a, b) {
         return a.id.localeCompare(b.id);
       });
-      var supported = models.filter(function (m) {
-        return m.openai_compatible;
-      });
-      var status = supported.length === models.length
-        ? '<td class="accent">✅ Supported</td>'
-        : '<td class="gold">⏳ Planned</td>';
       return (
-        "<tr><td>" + esc(family) + "</td><td>" + modelChips(models) + "</td>" +
-        status + "</tr>"
+        "<tr><td>" + esc(family) + "</td><td>" + modelChips(models) + "</td></tr>"
       );
     });
 
@@ -71,7 +57,7 @@
 
   function renderError(err) {
     tableBody.innerHTML =
-      '<tr><td colspan="3">Could not load the model list. ' +
+      '<tr><td colspan="2">Could not load the model list. ' +
       "OpenCode Zen models are documented at " +
       '<a href="https://opencode.ai/docs/zen/" target="_blank" rel="noopener">' +
       "opencode.ai/docs/zen</a>.</td></tr>";
