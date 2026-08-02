@@ -91,6 +91,26 @@ code, pre, .mono {
   color: var(--primary);
 }
 
+/* ---------- Responsive nav ---------- */
+@media (max-width: 640px) {
+  .nav {
+    flex-wrap: wrap;
+    row-gap: 10px;
+    padding: 14px 16px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+}
+
 .badge {
   display: inline-block;
   font-family: "JetBrains Mono", monospace;
