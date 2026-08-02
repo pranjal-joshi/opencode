@@ -1,0 +1,15 @@
+{
+  "domain": "opencode",
+  "name": "OpenCode",
+  "after_dependencies": ["assist_pipeline", "intent"],
+  "codeowners": ["@pranjal-joshi"],
+  "config_flow": true,
+  "dependencies": ["conversation"],
+  "documentation": "https://pranjal-joshi.github.io/opencode/",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/pranjal-joshi/opencode/issues",
+  "loggers": ["custom_components.opencode"],
+  "requirements": ["openai==2.45.0"],
+  "version": "0.1.0"
+}
