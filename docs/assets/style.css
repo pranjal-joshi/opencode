@@ -37,6 +37,15 @@ code, pre, .mono {
   font-family: "JetBrains Mono", ui-monospace, monospace;
 }
 
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
 .container {
   max-width: 980px;
   margin: 0 auto;
@@ -82,7 +91,7 @@ code, pre, .mono {
 }
 
 .nav-links a {
-  color: var(--on-muted);
+  color: var(--primary);
   text-decoration: none;
   font-size: 0.92rem;
   transition: color 0.15s ease;
@@ -166,8 +175,8 @@ code, pre, .mono {
 }
 
 .btn-ghost {
-  border: 1px solid var(--outline);
-  color: var(--on-bg);
+  border: 1px solid var(--primary);
+  color: var(--primary);
 }
 
 .btn:hover {
