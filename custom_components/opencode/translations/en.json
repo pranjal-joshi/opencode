@@ -22,6 +22,28 @@
     }
   },
   "config_subentries": {
+    "ai_task_data": {
+      "abort": {
+        "cannot_connect": "Failed to connect",
+        "entry_not_loaded": "The main integration entry is not loaded. Please ensure the integration is loaded before reconfiguring.",
+        "invalid_auth": "Invalid authentication",
+        "reconfigure_successful": "Reconfiguration was successful",
+        "unknown": "Unexpected error"
+      },
+      "entry_type": "AI task",
+      "initiate_flow": {
+        "reconfigure": "Reconfigure AI task",
+        "user": "Add AI task"
+      },
+      "step": {
+        "init": {
+          "data": {
+            "model": "Model"
+          },
+          "description": "Configure the AI task"
+        }
+      }
+    },
     "conversation": {
       "abort": {
         "cannot_connect": "Failed to connect",

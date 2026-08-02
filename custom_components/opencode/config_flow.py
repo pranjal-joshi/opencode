@@ -80,7 +80,10 @@ class OpenCodeConfigFlow(ConfigFlow, domain=DOMAIN):
         cls, config_entry: ConfigEntry
     ) -> dict[str, type[ConfigSubentryFlow]]:
         """Return subentries supported by this handler."""
-        return {"conversation": ConversationFlowHandler}
+        return {
+            "conversation": ConversationFlowHandler,
+            "ai_task_data": AITaskDataFlowHandler,
+        }
 
     @override
     async def async_step_user(
@@ -241,6 +244,82 @@ class ConversationFlowHandler(OpenCodeSubentryFlowHandler):
                         ),
                     ): SelectSelector(
                         SelectSelectorConfig(options=hass_apis, multiple=True)
+                    ),
+                }
+            ),
+        )
+
+
+class AITaskDataFlowHandler(OpenCodeSubentryFlowHandler):
+    """Handle AI task subentry flow."""
+
+    def __init__(self) -> None:
+        """Initialize the subentry flow."""
+        super().__init__()
+        self.options: dict[str, Any] = {}
+
+    @property
+    def _is_new(self) -> bool:
+        """Return if this is a new subentry."""
+        return self.source == SOURCE_USER
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """User flow to create an AI task."""
+        self.options = {}
+        return await self.async_step_init(user_input)
+
+    async def async_step_reconfigure(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """Handle reconfiguration of an AI task."""
+        self.options = self._get_reconfigure_subentry().data.copy()
+        return await self.async_step_init(user_input)
+
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """Manage AI task configuration."""
+        if self._get_entry().state is not ConfigEntryState.LOADED:
+            return self.async_abort(reason="entry_not_loaded")
+
+        if user_input is not None:
+            if self._is_new:
+                return self.async_create_entry(
+                    title=user_input[CONF_MODEL], data=user_input
+                )
+            return self.async_update_and_abort(
+                self._get_entry(),
+                self._get_reconfigure_subentry(),
+                title=user_input[CONF_MODEL],
+                data=user_input,
+            )
+
+        try:
+            await self._fetch_models()
+        except InvalidAuth:
+            return self.async_abort(reason="invalid_auth")
+        except CannotConnect:
+            return self.async_abort(reason="cannot_connect")
+        except Exception:
+            _LOGGER.exception("Unexpected exception")
+            return self.async_abort(reason="unknown")
+
+        options = [
+            SelectOptionDict(value=model, label=model) for model in self.models
+        ]
+
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(
+                        CONF_MODEL, default=self.options.get(CONF_MODEL)
+                    ): SelectSelector(
+                        SelectSelectorConfig(
+                            options=options, mode=SelectSelectorMode.DROPDOWN, sort=True
+                        ),
                     ),
                 }
             ),

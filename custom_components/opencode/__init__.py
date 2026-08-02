@@ -9,7 +9,7 @@ from openai import AsyncOpenAI, AuthenticationError, OpenAIError
 
 from .const import CONF_BASE_URL, DEFAULT_BASE_URL, LOGGER
 
-PLATFORMS = [Platform.CONVERSATION]
+PLATFORMS = [Platform.AI_TASK, Platform.CONVERSATION]
 
 type OpenCodeConfigEntry = ConfigEntry[AsyncOpenAI]
 

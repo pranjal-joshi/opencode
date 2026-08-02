@@ -52,9 +52,18 @@ def conversation_subentry_data(enable_assist: bool) -> dict[str, Any]:
 
 
 @pytest.fixture
+def ai_task_data_subentry_data() -> dict[str, Any]:
+    """Mock AI task subentry data."""
+    return {
+        CONF_MODEL: "deepseek-v4-flash",
+    }
+
+
+@pytest.fixture
 def mock_config_entry(
     hass: HomeAssistant,
     conversation_subentry_data: dict[str, Any],
+    ai_task_data_subentry_data: dict[str, Any],
 ) -> MockConfigEntry:
     """Mock a config entry."""
     return MockConfigEntry(
@@ -69,6 +78,13 @@ def mock_config_entry(
                 data=conversation_subentry_data,
                 subentry_id="ABCDEF",
                 subentry_type="conversation",
+                title="deepseek-v4-flash",
+                unique_id=None,
+            ),
+            ConfigSubentryData(
+                data=ai_task_data_subentry_data,
+                subentry_id="ABCDEG",
+                subentry_type="ai_task_data",
                 title="deepseek-v4-flash",
                 unique_id=None,
             ),

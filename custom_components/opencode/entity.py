@@ -5,7 +5,7 @@ import json
 from collections.abc import AsyncGenerator, Callable
 from mimetypes import guess_file_type
 from pathlib import Path
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 import openai
 from homeassistant.components import conversation
@@ -29,7 +29,9 @@ from openai.types.chat import (
     ChatCompletionUserMessageParam,
 )
 from openai.types.chat.chat_completion_message_function_tool_call_param import Function
-from openai.types.shared_params import FunctionDefinition
+from openai.types.shared_params import FunctionDefinition, ResponseFormatJSONSchema
+from openai.types.shared_params.response_format_json_schema import JSONSchema
+import voluptuous as vol
 from voluptuous_openapi import convert
 
 from . import OpenCodeConfigEntry
@@ -54,6 +56,49 @@ def _format_tool(
     if tool.description:
         tool_spec["description"] = tool.description
     return ChatCompletionFunctionToolParam(type="function", function=tool_spec)
+
+
+def _adjust_schema(schema: dict[str, Any]) -> None:
+    """Adjust the schema to be compatible with the OpenAI API."""
+    if schema["type"] == "object":
+        if "properties" not in schema:
+            return
+
+        if "required" not in schema:
+            schema["required"] = []
+
+        for prop, prop_info in schema["properties"].items():
+            _adjust_schema(prop_info)
+            if prop not in schema["required"]:
+                prop_info["type"] = [prop_info["type"], "null"]
+                schema["required"].append(prop)
+
+    elif schema["type"] == "array":
+        if "items" not in schema:
+            return
+
+        _adjust_schema(schema["items"])
+
+
+def _format_structured_output(
+    name: str, schema: vol.Schema, llm_api: llm.APIInstance | None
+) -> JSONSchema:
+    """Format the schema to be compatible with the OpenAI API."""
+    result: JSONSchema = {
+        "name": name,
+        "strict": True,
+    }
+    result_schema = convert(
+        schema,
+        custom_serializer=(
+            llm_api.custom_serializer if llm_api else llm.selector_serializer
+        ),
+    )
+
+    _adjust_schema(result_schema)
+
+    result["schema"] = result_schema
+    return result
 
 
 def _convert_content_to_chat_message(
@@ -183,6 +228,8 @@ class OpenCodeEntity(Entity):
     async def _async_handle_chat_log(
         self,
         chat_log: conversation.ChatLog,
+        structure_name: str | None = None,
+        structure: vol.Schema | None = None,
     ) -> None:
         """Generate an answer for the chat log."""
 
@@ -223,6 +270,16 @@ class OpenCodeEntity(Entity):
                 {"type": "text", "text": last_message["content"]},
                 *files,
             ]
+
+        if structure:
+            if TYPE_CHECKING:
+                assert structure_name is not None
+            model_args["response_format"] = ResponseFormatJSONSchema(
+                type="json_schema",
+                json_schema=_format_structured_output(
+                    structure_name, structure, chat_log.llm_api
+                ),
+            )
 
         client = self.entry.runtime_data
 
