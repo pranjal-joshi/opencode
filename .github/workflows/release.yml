@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get version from tag
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Build ZIP
+        run: |
+          cd custom_components/opencode
+          zip -r ../../opencode.zip . \
+            --exclude "**/__pycache__/*" \
+            --exclude "**/*.pyc" \
+            --exclude "**/*.pyo"
+
+      - name: Verify ZIP contents
+        run: |
+          echo "ZIP contents:"
+          python3 -c "
+          import zipfile
+          with zipfile.ZipFile('opencode.zip') as z:
+              for info in z.infolist():
+                  print(f'  {info.filename} ({info.file_size} bytes)')
+          "
+          echo ""
+          echo "Checking manifest version:"
+          python3 -c "
+          import zipfile, json
+          with zipfile.ZipFile('opencode.zip') as z:
+              manifest = json.loads(z.read('manifest.json'))
+              print(f'  version: {manifest[\"version\"]}')
+              print(f'  domain: {manifest[\"domain\"]}')
+          "
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: opencode.zip
+          generate_release_notes: true
+          name: "Release ${{ github.ref_name }}"

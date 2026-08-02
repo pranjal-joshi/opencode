@@ -1,0 +1,33 @@
+name: Feature Request
+description: Suggest an idea for the OpenCode integration
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your suggestion! Please check for existing issues and the roadmap first.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - New model family support (e.g. GPT, Claude, Gemini)
+        - New platform (e.g. AI task / structured data)
+        - UI / config flow improvement
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the feature
+      description: A clear and concise description of what you want to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative solutions
+      description: Describe alternatives you've considered.

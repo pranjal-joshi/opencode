@@ -1,13 +1,22 @@
 """Base entity for OpenCode."""
 
 import base64
-from collections.abc import AsyncGenerator, Callable
 import json
+from collections.abc import AsyncGenerator, Callable
 from mimetypes import guess_file_type
 from pathlib import Path
 from typing import Any, Literal
 
 import openai
+from homeassistant.components import conversation
+from homeassistant.config_entries import ConfigSubentry
+from homeassistant.const import CONF_MODEL
+from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import HomeAssistantError
+from homeassistant.helpers import device_registry as dr
+from homeassistant.helpers import llm
+from homeassistant.helpers.entity import Entity
+from homeassistant.helpers.json import json_dumps
 from openai.types.chat import (
     ChatCompletionAssistantMessageParam,
     ChatCompletionContentPartImageParam,
@@ -22,15 +31,6 @@ from openai.types.chat import (
 from openai.types.chat.chat_completion_message_function_tool_call_param import Function
 from openai.types.shared_params import FunctionDefinition
 from voluptuous_openapi import convert
-
-from homeassistant.components import conversation
-from homeassistant.config_entries import ConfigSubentry
-from homeassistant.const import CONF_MODEL
-from homeassistant.core import HomeAssistant
-from homeassistant.exceptions import HomeAssistantError
-from homeassistant.helpers import device_registry as dr, llm
-from homeassistant.helpers.entity import Entity
-from homeassistant.helpers.json import json_dumps
 
 from . import OpenCodeConfigEntry
 from .const import DOMAIN, LOGGER
@@ -212,9 +212,8 @@ class OpenCodeEntity(Entity):
         # Handle attachments by adding them to the last user message
         if last_content.role == "user" and last_content.attachments:
             last_message: ChatCompletionMessageParam = model_args["messages"][-1]
-            assert last_message["role"] == "user" and isinstance(
-                last_message["content"], str
-            )
+            assert last_message["role"] == "user"
+            assert isinstance(last_message["content"], str)
             # Encode files with base64 and append them to the text prompt
             files = await async_prepare_files_for_prompt(
                 self.hass,

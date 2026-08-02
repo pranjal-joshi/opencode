@@ -40,8 +40,18 @@ build-backend = "hatchling.build"
 [tool.ruff]
 line-length = 88
 target-version = "py312"
+
+[tool.ruff.lint]
 select = ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "DTZ", "T10", "ICN", "PIE", "PT", "Q", "RET", "SIM", "TID", "ARG", "PTH", "ERA", "PL", "TRY", "NPY", "RUF"]
-ignore = ["E501", "TRY003"]
+ignore = [
+    "E501",
+    "TRY003",
+    "N818",
+    "PLR0911",
+    "PLW2901",
+    "PLR2004",
+    "ARG001",
+]
 
 [tool.mypy]
 python_version = "3.12"

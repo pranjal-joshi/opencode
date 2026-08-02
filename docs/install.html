@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Installation · OpenCode for Home Assistant</title>
+  <meta name="description" content="Install the OpenCode Home Assistant integration via HACS or manually."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230b1326%22/><path d=%22M30 30h40a14 14 0 0 1 14 14v12a14 14 0 0 1-14 14H30a14 14 0 0 1-14-14V44a14 14 0 0 1 14-14z%22 fill=%22%234edea3%22/></svg>"/>
+</head>
+<body>
+  <nav class="nav">
+    <a class="nav-inner" href="index.html">
+      <span class="brand">OpenCode<span class="accent">.</span></span>
+      <span class="badge">HA Integration</span>
+    </a>
+    <div class="nav-links">
+      <a href="install.html">Install</a>
+      <a href="configuration.html">Configuration</a>
+      <a href="usage.html">Usage</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header class="page-header">
+      <h1>Installation</h1>
+      <p>Install the OpenCode integration with HACS (recommended) or manually.</p>
+    </header>
+
+    <div class="content">
+      <h2>Prerequisites</h2>
+      <ul>
+        <li>Home Assistant <code>2025.2.4</code> or newer</li>
+        <li><a href="https://opencode.ai/auth" target="_blank" rel="noopener">An OpenCode Zen API key</a> (free to create)</li>
+        <li>Python 3.12+ (bundled with Home Assistant)</li>
+      </ul>
+
+      <h2>Option 1 — HACS (recommended)</h2>
+      <p>Add this repository as a custom repository, then install it as a normal integration.</p>
+      <ol class="steps">
+        <li>
+          <h3>Open HACS</h3>
+          <p>Go to <strong>HACS → Integrations</strong> in the sidebar.</p>
+        </li>
+        <li>
+          <h3>Add the custom repository</h3>
+          <p>Click the <strong>⋮</strong> menu (top-right) → <strong>Custom repositories</strong>. Add:</p>
+          <pre><code><span class="n">https://github.com/pranjal-joshi/opencode</span></code></pre>
+          <p>with category <strong>Integration</strong>, then click <strong>Add</strong>.</p>
+        </li>
+        <li>
+          <h3>Install</h3>
+          <p>Find <strong>OpenCode</strong> in the list, click <strong>Download</strong>, then <strong>Install</strong>.</p>
+        </li>
+        <li>
+          <h3>Restart Home Assistant</h3>
+          <p>Restart, then head to <a href="configuration.html">Configuration</a>.</p>
+        </li>
+      </ol>
+
+      <h2>Option 2 — Manual install</h2>
+      <p>Download the <a href="https://github.com/pranjal-joshi/opencode/releases" target="_blank" rel="noopener">latest release ZIP</a> and extract <code>custom_components/opencode</code> into your <code>config/custom_components/</code> directory. Restart Home Assistant.</p>
+
+      <div class="note">
+        The integration pulls in the <code>openai</code> Python package automatically during setup. On some installs, you may need to wait a moment for the dependency to be installed.
+      </div>
+
+      <div class="warn">
+        Never share your OpenCode Zen API key. It is stored in Home Assistant's encrypted <code>.storage</code> files and grants access to your account billing.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="index.html">OpenCode</a> · a community HACS integration · <a href="https://github.com/pranjal-joshi/opencode" target="_blank" rel="noopener">Source</a> · MIT License</p>
+  </footer>
+</body>
+</html>

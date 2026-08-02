@@ -1,0 +1,69 @@
+name: Bug Report
+description: Report a bug or issue with the OpenCode integration
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please check for existing issues first.
+  - type: input
+    id: ha_version
+    attributes:
+      label: Home Assistant version
+      description: The version of Home Assistant you are running.
+      placeholder: "2025.2.4"
+    validations:
+      required: true
+  - type: input
+    id: hacs_version
+    attributes:
+      label: HACS version
+      description: The version of HACS you are running.
+      placeholder: "2.0.5"
+    validations:
+      required: true
+  - type: input
+    id: integration_version
+    attributes:
+      label: OpenCode integration version
+      description: The version of the integration installed.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Model used
+      description: Which OpenCode Zen model you configured.
+      placeholder: "deepseek-v4-flash"
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: What's wrong?
+      options:
+        - Setup / config flow fails
+        - Conversation doesn't respond
+        - Tool calls / Home Assistant control not working
+        - Voice assistant not working
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Copy any relevant logs from Settings → System → Logs. Remove any sensitive data (API keys!).
+      render: text
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior.

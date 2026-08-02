@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OpenCode for Home Assistant</title>
+  <meta name="description" content="Use OpenCode Zen models as a conversation agent in Home Assistant. DeepSeek, MiniMax, GLM, Kimi, and free models."/>
+  <meta property="og:title" content="OpenCode for Home Assistant"/>
+  <meta property="og:description" content="Bring OpenCode Zen AI models to your Home Assistant as conversation agents."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230b1326%22/><path d=%22M30 30h40a14 14 0 0 1 14 14v12a14 14 0 0 1-14 14H30a14 14 0 0 1-14-14V44a14 14 0 0 1 14-14z%22 fill=%22%234edea3%22/></svg>"/>
+</head>
+<body>
+  <nav class="nav">
+    <a class="nav-inner" href="index.html">
+      <span class="brand">OpenCode<span class="accent">.</span></span>
+      <span class="badge">HA Integration</span>
+    </a>
+    <div class="nav-links">
+      <a href="install.html">Install</a>
+      <a href="configuration.html">Configuration</a>
+      <a href="usage.html">Usage</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>OpenCode Zen models for your<br/><span class="accent">smart home</span></h1>
+    <p class="lede">Turn any OpenAI-compatible OpenCode Zen model into a Home Assistant conversation agent. Talk to your home, control devices, and use the free models — all with one API key.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="install.html">Install Now</a>
+      <a class="btn btn-ghost" href="https://github.com/pranjal-joshi/opencode" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://opencode.ai/auth" target="_blank" rel="noopener">Get an API key</a>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Why OpenCode Zen?</h2>
+      <p class="section-sub">OpenCode Zen is a curated AI gateway that only serves tested, verified models. This integration brings that quality to Home Assistant.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>🤖 Conversation Agents</h3>
+          <p>Add unlimited agents — one per model — and switch between them from Assist, dashboards, or automations.</p>
+        </div>
+        <div class="card">
+          <h3>🏠 Home Control</h3>
+          <p>Let the model call tools to interact with your devices and entities, just like the official OpenAI and Anthropic integrations.</p>
+        </div>
+        <div class="card">
+          <h3>🎤 Voice Ready</h3>
+          <p>Works out of the box with the Assist voice pipeline and voice assistants.</p>
+        </div>
+        <div class="card">
+          <h3>🆓 Free Models</h3>
+          <p>Use the free OpenCode Zen models (like <code>deepseek-v4-flash-free</code>) at no cost.</p>
+        </div>
+        <div class="card">
+          <h3>📎 Attachments</h3>
+          <p>Send images and PDFs along with your messages for richer responses.</p>
+        </div>
+        <div class="card">
+          <h3>💬 Streaming</h3>
+          <p>Real-time token streaming in the conversation UI for a snappy feel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Get started in 3 steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Grab a free API key</h3>
+          <p>Sign in at <a href="https://opencode.ai/auth" target="_blank" rel="noopener">opencode.ai/auth</a>, add billing, and copy your API key.</p>
+        </li>
+        <li>
+          <h3>Install the integration</h3>
+          <p>Install via HACS or manually — full instructions on the <a href="install.html">install page</a>.</p>
+        </li>
+        <li>
+          <h3>Add a conversation agent</h3>
+          <p>Enter your key, pick a model, and start chatting. See the <a href="configuration.html">configuration page</a> for details.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Supported models</h2>
+      <p class="section-sub">v1 supports all models served through the OpenAI Chat Completions protocol. GPT, Claude, Qwen, Gemini, and Grok families are planned for future releases.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Family</th><th>Examples</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>DeepSeek</td><td><code>deepseek-v4-flash</code>, <code>deepseek-v4-pro</code></td><td class="accent">✅ Supported</td></tr>
+            <tr><td>MiniMax</td><td><code>minimax-m3</code>, <code>minimax-m2.7</code></td><td class="accent">✅ Supported</td></tr>
+            <tr><td>GLM</td><td><code>glm-5</code>, <code>glm-5.2</code></td><td class="accent">✅ Supported</td></tr>
+            <tr><td>Kimi</td><td><code>kimi-k2.5</code>, <code>kimi-k3</code></td><td class="accent">✅ Supported</td></tr>
+            <tr><td>Free models</td><td><code>deepseek-v4-flash-free</code>, <code>nemotron-3-ultra-free</code></td><td class="accent">✅ Supported</td></tr>
+            <tr><td>GPT</td><td><code>gpt-5.6-sol</code> …</td><td class="gold">⏳ Planned</td></tr>
+            <tr><td>Claude / Qwen</td><td><code>claude-sonnet-5</code> …</td><td class="gold">⏳ Planned</td></tr>
+            <tr><td>Gemini</td><td><code>gemini-3.5-flash</code> …</td><td class="gold">⏳ Planned</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="index.html">OpenCode</a> · a community HACS integration · <a href="https://github.com/pranjal-joshi/opencode" target="_blank" rel="noopener">Source</a> · MIT License</p>
+  </footer>
+</body>
+</html>

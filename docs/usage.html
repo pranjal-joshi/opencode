@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Usage · OpenCode for Home Assistant</title>
+  <meta name="description" content="Use OpenCode conversation agents in Assist, dashboards, and automations."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230b1326%22/><path d=%22M30 30h40a14 14 0 0 1 14 14v12a14 14 0 0 1-14 14H30a14 14 0 0 1-14-14V44a14 14 0 0 1 14-14z%22 fill=%22%234edea3%22/></svg>"/>
+</head>
+<body>
+  <nav class="nav">
+    <a class="nav-inner" href="index.html">
+      <span class="brand">OpenCode<span class="accent">.</span></span>
+      <span class="badge">HA Integration</span>
+    </a>
+    <div class="nav-links">
+      <a href="install.html">Install</a>
+      <a href="configuration.html">Configuration</a>
+      <a href="usage.html">Usage</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header class="page-header">
+      <h1>Usage</h1>
+      <p>Chat, control your home, and automate with your OpenCode agents.</p>
+    </header>
+
+    <div class="content">
+      <h2>Chat in the UI</h2>
+      <p>Open <strong>Conversations</strong> from the sidebar (if available in your HA version) or use the <em>Assist</em> dialog and select your OpenCode agent as the conversation agent.</p>
+
+      <h2>Voice assistants</h2>
+      <p>In <strong>Settings → Voice assistants</strong>, create or edit an assistant and set the <strong>Conversation agent</strong> to your OpenCode agent (e.g. <code>conversation.deepseek_v4_flash</code>).</p>
+
+      <h2>Home Assistant control</h2>
+      <p>If you enabled <strong>Control Home Assistant</strong> during setup, the model can call tools to query and control your devices. Example prompts:</p>
+      <pre><code><span class="s">"Turn off all lights in the living room"</span>
+<span class="s">"What's the temperature in the bedroom?"</span>
+<span class="s">"Lock the front door"</span></code></pre>
+
+      <h2>Automations</h2>
+      <p>Use the <code>conversation.process</code> service in automations:</p>
+      <pre><code><span class="k">automation</span>:
+  <span class="k">- alias</span>: <span class="s">"Morning briefing with OpenCode"</span>
+    <span class="k">trigger</span>:
+      <span class="k">- platform</span>: <span class="n">time</span>
+        <span class="k">at</span>: <span class="s">"07:00:00"</span>
+    <span class="k">action</span>:
+      <span class="k">- service</span>: <span class="n">conversation.process</span>
+        <span class="k">data</span>:
+          <span class="k">text</span>: <span class="s">"Good morning! What should I know today?"</span>
+          <span class="k">agent_id</span>: <span class="s">conversation.deepseek_v4_flash</span></code></pre>
+
+      <h2>Attachments</h2>
+      <p>When using the conversation UI or the Assist dialog, you can attach images and PDFs. They are base64-encoded and sent to the model.</p>
+
+      <h2>Example: switch models per automation</h2>
+      <pre><code><span class="k">action</span>:
+  <span class="k">- service</span>: <span class="n">conversation.process</span>
+    <span class="k">data</span>:
+      <span class="k">agent_id</span>: <span class="s">conversation.glm_5</span>
+      <span class="k">text</span>: <span class="s">"Summarize my calendar for today"</span></code></pre>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="index.html">OpenCode</a> · a community HACS integration · <a href="https://github.com/pranjal-joshi/opencode" target="_blank" rel="noopener">Source</a> · MIT License</p>
+  </footer>
+</body>
+</html>

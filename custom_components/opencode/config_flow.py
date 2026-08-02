@@ -3,9 +3,7 @@
 import logging
 from typing import Any, override
 
-from openai import AsyncOpenAI, AuthenticationError, OpenAIError, PermissionDeniedError
 import voluptuous as vol
-
 from homeassistant.config_entries import (
     SOURCE_USER,
     ConfigEntry,
@@ -27,6 +25,7 @@ from homeassistant.helpers.selector import (
     SelectSelectorMode,
     TemplateSelector,
 )
+from openai import AsyncOpenAI, AuthenticationError, OpenAIError, PermissionDeniedError
 
 from .const import (
     CONF_BASE_URL,
