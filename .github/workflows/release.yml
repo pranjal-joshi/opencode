@@ -11,22 +11,26 @@ permissions:
 jobs:
   release:
     name: Build and publish release
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Get version from tag
         id: version
-        run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Build ZIP
         run: |
           cd custom_components/opencode
           zip -r ../../opencode.zip . \
-            --exclude "**/__pycache__/*" \
-            --exclude "**/*.pyc" \
-            --exclude "**/*.pyo"
+            --exclude "*/__pycache__/*" \
+            --exclude "*.pyc" \
+            --exclude "*.pyo"
 
       - name: Verify ZIP contents
         run: |
@@ -34,17 +38,18 @@ jobs:
           python3 -c "
           import zipfile
           with zipfile.ZipFile('opencode.zip') as z:
-              for info in z.infolist():
-                  print(f'  {info.filename} ({info.file_size} bytes)')
+            for info in z.infolist():
+              print(f'  {info.filename} ({info.file_size} bytes)')
           "
+
           echo ""
           echo "Checking manifest version:"
           python3 -c "
           import zipfile, json
           with zipfile.ZipFile('opencode.zip') as z:
-              manifest = json.loads(z.read('manifest.json'))
-              print(f'  version: {manifest[\"version\"]}')
-              print(f'  domain: {manifest[\"domain\"]}')
+            manifest = json.loads(z.read('manifest.json'))
+            print(f'  version: {manifest[\"version\"]}')
+            print(f'  domain: {manifest[\"domain\"]}')
           "
 
       - name: Create GitHub Release
@@ -53,3 +58,33 @@ jobs:
           files: opencode.zip
           generate_release_notes: true
           name: "Release ${{ github.ref_name }}"
+          body: |
+            ## 🆕 What's New?
+
+            ### ⏳Auto-Revert Timer
+            OpenCode Zen moods can now automatically revert to their previous state after a configurable duration.
+
+            #### Per-Mood Controls (Dashboard)
+            - **Revert Timer** (switch) — Enable/disable auto-revert per mood
+            - **Revert After** (number) — Set duration in minutes (1 min to 24 hrs). Greyed out when timer is off.
+            - **Revert Countdown** (sensor) — Shows remaining time, HA auto-formats to mins/hrs/days
+
+            #### New Service
+            - **`opencode.cancel_auto_revert`** — Cancel the active timer without reverting
+
+            #### Service Updates
+            - **`opencode.activate_mood`** — New optional `duration` param to override the timer setting
+
+            #### Behaviour
+            - Timer starts automatically when mood is activated (if switch is ON)
+            - Toggle the switch OFF cancels any active timer immediately
+            - Toggle the switch ON while mood is active starts the timer immediately
+            - Manual revert cancels the timer
+            - Timer state is ephemeral (consistent with existing snapshot design)
+            - Switch and number values persist across HA restarts via `RestoreEntity`
+
+            ## 🐛 Bug Fixes
+
+            -  Fixed Revert logic for lights where "Only last light reverts"
+
+            **Full Changelog**: https://github.com/pranjal-joshi/opencode/compare/v0.1.0...v1.1.8
