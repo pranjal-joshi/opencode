@@ -11,5 +11,5 @@
   "issue_tracker": "https://github.com/pranjal-joshi/opencode/issues",
   "loggers": ["custom_components.opencode"],
   "requirements": ["openai==2.45.0"],
-  "version": "0.1.0"
+  "version": "1.0.0"
 }
