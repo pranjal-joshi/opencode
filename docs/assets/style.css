@@ -152,6 +152,26 @@ a:hover {
   font-size: 1.12rem;
 }
 
+.typed {
+  color: var(--on-muted);
+  white-space: nowrap;
+}
+
+.typed-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  background: var(--primary);
+  margin-left: 2px;
+  vertical-align: baseline;
+  animation: typed-blink 1s step-end infinite;
+}
+
+@keyframes typed-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .cta-row {
   display: flex;
   gap: 12px;
@@ -181,6 +201,15 @@ a:hover {
 
 .btn:hover {
   transform: translateY(-1px);
+}
+
+.btn-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  margin-right: 6px;
+  display: inline-block;
+  fill: currentColor;
 }
 
 /* ---------- Sections ---------- */
