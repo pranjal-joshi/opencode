@@ -1,6 +1,6 @@
 {
-  "count": 60,
-  "fetched_at": "2026-08-04T05:25:57+00:00",
+  "count": 61,
+  "fetched_at": "2026-08-05T05:25:32+00:00",
   "models": [
     {
       "family": "Claude",
@@ -330,6 +330,12 @@
       "family": "Other",
       "free": true,
       "id": "ling-3.0-flash-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "longcat-2.0-free",
       "openai_compatible": true
     },
     {
