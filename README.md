@@ -10,19 +10,15 @@
 [![Python](https://img.shields.io/badge/python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Docs](https://img.shields.io/badge/docs-github.io-8A2BE2?style=for-the-badge)](https://pranjal-joshi.github.io/opencode/)
 
-**Use OpenCode Zen models as a conversation agent in Home Assistant.**
+**Talk to your home with AI.** OpenCode turns [OpenCode Zen](https://opencode.ai/docs/zen/)
+— a curated AI gateway with fast, free, OpenAI-compatible models — into Home
+Assistant conversation agents. Add DeepSeek, MiniMax, GLM, Kimi, Big Pickle,
+and the free models, then chat with your home from Assist, the voice pipeline,
+or the conversation UI.
 
-[OpenCode Zen](https://opencode.ai/docs/zen/) is a curated AI gateway by the
-OpenCode team. This integration turns any of its **OpenAI-compatible** models
-into a Home Assistant conversation agent, so you can talk to (and control) your
-home with DeepSeek, MiniMax, GLM, Kimi, and the free models — all through your
-existing OpenCode Zen API key.
-
-> ⚠️ **Scope note:** OpenCode Zen routes different model families through
-> different protocols. v1 of this integration supports the **OpenAI Chat
-> Completions** family (DeepSeek, MiniMax, GLM, Kimi, Big Pickle, and all the
-> `*-free` models). GPT/Grok (Responses API), Claude/Qwen (Messages API) and
-> Gemini (Google API) are **not** yet supported. See the [FAQ](https://pranjal-joshi.github.io/opencode/faq.html).
+> 👀 **New here?** Start with the [documentation site](https://pranjal-joshi.github.io/opencode/)
+> for a guided tour, or jump straight to [Setup](#setup) below — it only takes a
+> few minutes and a free API key.
 
 ## Features
 
@@ -58,14 +54,10 @@ existing OpenCode Zen API key.
 4. Click **Add conversation agent**, pick a model, and you're done
 5. (Optional) Click **Add AI task**, pick a model for structured data generation
 
-Full instructions: [https://pranjal-joshi.github.io/opencode/](https://pranjal-joshi.github.io/opencode/)
+## Documentation
 
-## Supported Models (v1)
-
-All models exposed at `https://opencode.ai/zen/v1/models` except those using
-the Responses (`gpt-*`, `grok-*`), Anthropic (`claude-*`, `qwen-*`), or Google
-(`gemini-*`) protocols. This currently includes **DeepSeek, MiniMax, GLM, Kimi,
-Big Pickle**, and all **free** models (e.g. `deepseek-v4-flash-free`).
+Full instructions, screenshots, and troubleshooting are available on the
+[documentation site](https://pranjal-joshi.github.io/opencode/).
 
 ## License
 
