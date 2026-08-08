@@ -1,6 +1,6 @@
 {
   "count": 61,
-  "fetched_at": "2026-08-07T04:33:26+00:00",
+  "fetched_at": "2026-08-08T03:44:26+00:00",
   "models": [
     {
       "family": "Claude",
@@ -12,12 +12,6 @@
       "family": "Claude",
       "free": false,
       "id": "claude-haiku-4-5",
-      "openai_compatible": false
-    },
-    {
-      "family": "Claude",
-      "free": false,
-      "id": "claude-opus-4-1",
       "openai_compatible": false
     },
     {
@@ -330,6 +324,12 @@
       "family": "Other",
       "free": true,
       "id": "ling-3.0-flash-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "ling-3.0-tiny-free",
       "openai_compatible": true
     },
     {
