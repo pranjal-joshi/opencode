@@ -1,6 +1,6 @@
 {
-  "count": 61,
-  "fetched_at": "2026-08-11T03:55:35+00:00",
+  "count": 60,
+  "fetched_at": "2026-08-12T04:18:42+00:00",
   "models": [
     {
       "family": "Claude",
@@ -317,25 +317,19 @@
     {
       "family": "Other",
       "free": true,
+      "id": "hy3-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
       "id": "laguna-s-2.1-free",
       "openai_compatible": true
     },
     {
       "family": "Other",
       "free": true,
-      "id": "ling-3.0-flash-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
       "id": "ling-3.0-tiny-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "longcat-2.0-free",
       "openai_compatible": true
     },
     {
@@ -353,7 +347,7 @@
     {
       "family": "Other",
       "free": true,
-      "id": "north-mini-code-free",
+      "id": "nemotron-3.5-lightning-free",
       "openai_compatible": true
     },
     {
