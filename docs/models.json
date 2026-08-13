@@ -1,6 +1,6 @@
 {
-  "count": 60,
-  "fetched_at": "2026-08-12T04:18:42+00:00",
+  "count": 61,
+  "fetched_at": "2026-08-13T04:21:30+00:00",
   "models": [
     {
       "family": "Claude",
@@ -258,6 +258,12 @@
       "family": "Grok",
       "free": false,
       "id": "grok-4.5",
+      "openai_compatible": false
+    },
+    {
+      "family": "Grok",
+      "free": false,
+      "id": "grok-4.6",
       "openai_compatible": false
     },
     {
