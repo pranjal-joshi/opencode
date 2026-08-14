@@ -1,6 +1,6 @@
 {
   "count": 61,
-  "fetched_at": "2026-08-13T04:21:30+00:00",
+  "fetched_at": "2026-08-14T04:19:14+00:00",
   "models": [
     {
       "family": "Claude",
@@ -255,6 +255,12 @@
       "openai_compatible": false
     },
     {
+      "family": "Gemini",
+      "free": false,
+      "id": "gemini-3.7-flash",
+      "openai_compatible": false
+    },
+    {
       "family": "Grok",
       "free": false,
       "id": "grok-4.5",
@@ -330,12 +336,6 @@
       "family": "Other",
       "free": true,
       "id": "laguna-s-2.1-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "ling-3.0-tiny-free",
       "openai_compatible": true
     },
     {
