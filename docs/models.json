@@ -1,6 +1,6 @@
 {
-  "count": 63,
-  "fetched_at": "2026-08-28T14:22:43+00:00",
+  "count": 64,
+  "fetched_at": "2026-08-29T09:05:26+00:00",
   "models": [
     {
       "family": "Claude",
@@ -336,6 +336,12 @@
       "family": "Other",
       "free": true,
       "id": "laguna-s-2.1-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "ling-3.0-flash-fin-free",
       "openai_compatible": true
     },
     {
