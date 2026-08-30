@@ -1,6 +1,6 @@
 {
-  "count": 64,
-  "fetched_at": "2026-08-29T09:05:26+00:00",
+  "count": 63,
+  "fetched_at": "2026-08-30T08:20:39+00:00",
   "models": [
     {
       "family": "Claude",
@@ -324,12 +324,6 @@
       "family": "Other",
       "free": true,
       "id": "big-pickle",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "hy3-free",
       "openai_compatible": true
     },
     {
