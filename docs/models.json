@@ -1,6 +1,6 @@
 {
-  "count": 61,
-  "fetched_at": "2026-08-05T05:25:32+00:00",
+  "count": 63,
+  "fetched_at": "2026-08-30T08:20:39+00:00",
   "models": [
     {
       "family": "Claude",
@@ -12,12 +12,6 @@
       "family": "Claude",
       "free": false,
       "id": "claude-haiku-4-5",
-      "openai_compatible": false
-    },
-    {
-      "family": "Claude",
-      "free": false,
-      "id": "claude-opus-4-1",
       "openai_compatible": false
     },
     {
@@ -261,9 +255,21 @@
       "openai_compatible": false
     },
     {
+      "family": "Gemini",
+      "free": false,
+      "id": "gemini-3.7-flash",
+      "openai_compatible": false
+    },
+    {
       "family": "Grok",
       "free": false,
       "id": "grok-4.5",
+      "openai_compatible": false
+    },
+    {
+      "family": "Grok",
+      "free": false,
+      "id": "grok-4.6",
       "openai_compatible": false
     },
     {
@@ -329,19 +335,25 @@
     {
       "family": "Other",
       "free": true,
-      "id": "ling-3.0-flash-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "longcat-2.0-free",
+      "id": "ling-3.0-flash-fin-free",
       "openai_compatible": true
     },
     {
       "family": "Other",
       "free": true,
       "id": "mimo-v2.5-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "muse-spark-1.2",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "muse-spark-1.2-contributor-free",
       "openai_compatible": true
     },
     {
@@ -353,7 +365,7 @@
     {
       "family": "Other",
       "free": true,
-      "id": "north-mini-code-free",
+      "id": "nemotron-3.5-lightning-free",
       "openai_compatible": true
     },
     {
