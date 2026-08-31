@@ -58,29 +58,32 @@ jobs:
           files: opencode.zip
           name: "Release ${{ github.ref_name }}"
           body: |
-            ## 🆕 What's New?
-
-            ### 🤖 Conversation Agents
-            - **Unlimited agents** — add one per model via config subentries
-            - **Model picker** — fetches the OpenAI-compatible catalog from OpenCode Zen
-            - **Voice pipeline ready** — works with Assist and the voice pipeline
-            - **Home Assistant control** — let the model call tools to control devices & entities
-
-            ### ⚙️ AI Tasks
-            - **`ai_task.generate_data` service** — generate structured data on demand
-            - **Per-task models** — add an AI task subentry for any supported model
-
-            ### 💬 Chat & Attachments
-            - **Chat log streaming** — real-time token streaming in the conversation UI
-            - **Attachments** — send images/PDFs with your message
-            - **Free models** — use the free OpenCode Zen models out of the box
-
-            #### Supported Models (v1)
-            - DeepSeek, MiniMax, GLM, Kimi, Big Pickle, and all `*-free` models served via the OpenAI Chat Completions endpoint
-            - GPT/Grok (Responses), Claude/Qwen (Messages), and Gemini (Google) are not yet supported
-
             ## 🐛 Bug Fixes
 
-            - Initial release — no fixes to report
+            ### Home Assistant 2026.9 compatibility
 
-            **Full Changelog**: https://github.com/pranjal-joshi/opencode/commits/v1.0.0
+            Fixes the integration failing to load on Home Assistant **2026.9.0b4 and
+            later** with:
+
+            ```
+            ModuleNotFoundError: No module named 'voluptuous_openapi'
+            ```
+
+            Home Assistant 2026.9 dropped `voluptuous-openapi` from core requirements
+            and replaced it with [`probatio`](https://github.com/frenck/probatio), which
+            now provides the schema-to-OpenAPI conversion used when exposing Home
+            Assistant tools to the model.
+
+            The integration now imports `probatio.to_openapi` when it is available and
+            falls back to `voluptuous_openapi.convert` otherwise, so this release works
+            on both **2026.9+** and **2026.8 and earlier**.
+
+            No configuration changes are required — update and restart Home Assistant.
+
+            ## 🔁 Upgrading from v1.0.0
+
+            If you are on Home Assistant 2026.9+, v1.0.0 will not start at all. Update
+            through HACS and restart; your existing agents and AI task subentries are
+            preserved.
+
+            **Full Changelog**: https://github.com/pranjal-joshi/opencode/compare/v1.0.0...${{ github.ref_name }}
