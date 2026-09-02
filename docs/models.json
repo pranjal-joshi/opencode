@@ -1,11 +1,17 @@
 {
-  "count": 63,
-  "fetched_at": "2026-09-01T07:50:49+00:00",
+  "count": 64,
+  "fetched_at": "2026-09-02T07:07:44+00:00",
   "models": [
     {
       "family": "Claude",
       "free": false,
       "id": "claude-fable-5",
+      "openai_compatible": false
+    },
+    {
+      "family": "Claude",
+      "free": false,
+      "id": "claude-fable-5-1",
       "openai_compatible": false
     },
     {
