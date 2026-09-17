@@ -1,6 +1,6 @@
 {
-  "count": 70,
-  "fetched_at": "2026-09-16T07:43:01+00:00",
+  "count": 71,
+  "fetched_at": "2026-09-17T07:42:54+00:00",
   "models": [
     {
       "family": "Claude",
@@ -408,6 +408,12 @@
       "family": "Other",
       "free": true,
       "id": "nemotron-3.5-lightning-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "union-alpha",
       "openai_compatible": true
     },
     {
