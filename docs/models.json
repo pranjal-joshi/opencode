@@ -1,6 +1,6 @@
 {
-  "count": 71,
-  "fetched_at": "2026-09-18T07:25:51+00:00",
+  "count": 74,
+  "fetched_at": "2026-09-19T07:22:00+00:00",
   "models": [
     {
       "family": "Claude",
@@ -96,6 +96,12 @@
       "family": "DeepSeek",
       "free": false,
       "id": "deepseek-v4-pro",
+      "openai_compatible": true
+    },
+    {
+      "family": "DeepSeek",
+      "free": false,
+      "id": "deepseek-v4.1-flash",
       "openai_compatible": true
     },
     {
@@ -364,6 +370,18 @@
     },
     {
       "family": "Other",
+      "free": false,
+      "id": "jev-1.13",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "jev-1.13-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
       "free": true,
       "id": "ling-3.0-flash-fin-free",
       "openai_compatible": true
@@ -411,12 +429,6 @@
       "openai_compatible": true
     },
     {
-      "family": "Other",
-      "free": false,
-      "id": "union-alpha",
-      "openai_compatible": true
-    },
-    {
       "family": "Qwen",
       "free": false,
       "id": "qwen3.5-plus",
@@ -426,6 +438,12 @@
       "family": "Qwen",
       "free": false,
       "id": "qwen3.6-plus",
+      "openai_compatible": false
+    },
+    {
+      "family": "Qwen",
+      "free": false,
+      "id": "qwen3.8-flash",
       "openai_compatible": false
     }
   ],
