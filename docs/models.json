@@ -1,6 +1,6 @@
 {
-  "count": 74,
-  "fetched_at": "2026-09-21T07:59:25+00:00",
+  "count": 76,
+  "fetched_at": "2026-09-22T07:44:35+00:00",
   "models": [
     {
       "family": "Claude",
@@ -317,6 +317,12 @@
     {
       "family": "Grok",
       "free": false,
+      "id": "grok-4.7",
+      "openai_compatible": false
+    },
+    {
+      "family": "Grok",
+      "free": false,
       "id": "grok-build-0.1",
       "openai_compatible": false
     },
@@ -390,6 +396,12 @@
       "family": "Other",
       "free": true,
       "id": "mimo-v2.5-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "mimo-v2.6-flash-free",
       "openai_compatible": true
     },
     {
