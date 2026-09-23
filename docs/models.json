@@ -1,6 +1,6 @@
 {
-  "count": 76,
-  "fetched_at": "2026-09-22T07:44:35+00:00",
+  "count": 79,
+  "fetched_at": "2026-09-23T07:47:17+00:00",
   "models": [
     {
       "family": "Claude",
@@ -48,6 +48,12 @@
       "family": "Claude",
       "free": false,
       "id": "claude-opus-5",
+      "openai_compatible": false
+    },
+    {
+      "family": "Claude",
+      "free": false,
+      "id": "claude-opus-5-5",
       "openai_compatible": false
     },
     {
@@ -258,6 +264,18 @@
       "family": "GPT",
       "free": false,
       "id": "gpt-6-astra",
+      "openai_compatible": false
+    },
+    {
+      "family": "GPT",
+      "free": false,
+      "id": "gpt-6-luna",
+      "openai_compatible": false
+    },
+    {
+      "family": "GPT",
+      "free": false,
+      "id": "gpt-6-sol",
       "openai_compatible": false
     },
     {
