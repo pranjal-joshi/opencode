@@ -1,6 +1,6 @@
 {
-  "count": 80,
-  "fetched_at": "2026-09-25T07:52:28+00:00",
+  "count": 81,
+  "fetched_at": "2026-09-26T07:45:44+00:00",
   "models": [
     {
       "family": "Claude",
@@ -480,6 +480,12 @@
       "family": "Qwen",
       "free": false,
       "id": "qwen3.8-flash",
+      "openai_compatible": false
+    },
+    {
+      "family": "Qwen",
+      "free": false,
+      "id": "qwen3.8-max",
       "openai_compatible": false
     }
   ],
