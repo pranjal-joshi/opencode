@@ -1,6 +1,6 @@
 {
-  "count": 82,
-  "fetched_at": "2026-09-28T08:43:48+00:00",
+  "count": 83,
+  "fetched_at": "2026-09-29T08:34:48+00:00",
   "models": [
     {
       "family": "Claude",
@@ -78,6 +78,12 @@
       "family": "Claude",
       "free": false,
       "id": "claude-sonnet-5",
+      "openai_compatible": false
+    },
+    {
+      "family": "Claude",
+      "free": false,
+      "id": "claude-sonnet-5-5",
       "openai_compatible": false
     },
     {
