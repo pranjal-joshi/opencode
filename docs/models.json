@@ -1,6 +1,6 @@
 {
-  "count": 83,
-  "fetched_at": "2026-09-29T08:34:48+00:00",
+  "count": 84,
+  "fetched_at": "2026-09-30T08:37:11+00:00",
   "models": [
     {
       "family": "Claude",
@@ -282,6 +282,12 @@
       "family": "GPT",
       "free": false,
       "id": "gpt-6-sol",
+      "openai_compatible": false
+    },
+    {
+      "family": "GPT",
+      "free": false,
+      "id": "gpt-6.1-sol",
       "openai_compatible": false
     },
     {
