@@ -10,6 +10,6 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/pranjal-joshi/opencode/issues",
   "loggers": ["custom_components.opencode"],
-  "requirements": ["openai==2.45.0"],
+  "requirements": ["openai>=2.45.0"],
   "version": "1.0.1"
 }

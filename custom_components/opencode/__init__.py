@@ -1,5 +1,7 @@
 """The OpenCode integration."""
 
+from typing import Any, cast
+
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_API_KEY, Platform
 from homeassistant.core import HomeAssistant
@@ -19,7 +21,8 @@ def _create_client(hass: HomeAssistant, entry: OpenCodeConfigEntry) -> AsyncOpen
     return AsyncOpenAI(
         base_url=entry.data.get(CONF_BASE_URL, DEFAULT_BASE_URL),
         api_key=entry.data[CONF_API_KEY],
-        http_client=get_async_client(hass),
+        # Legacy HTTPX clients are supported at runtime only (openai>=3).
+        http_client=cast(Any, get_async_client(hass)),
     )
 
 

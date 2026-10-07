@@ -1,7 +1,7 @@
 """Config flow for the OpenCode integration."""
 
 import logging
-from typing import Any, override
+from typing import Any, cast, override
 
 import voluptuous as vol
 from homeassistant.config_entries import (
@@ -54,7 +54,8 @@ async def _get_models(
     client = AsyncOpenAI(
         base_url=base_url,
         api_key=api_key,
-        http_client=get_async_client(hass),
+        # Legacy HTTPX clients are supported at runtime only (openai>=3).
+        http_client=cast(Any, get_async_client(hass)),
     )
     try:
         return [
