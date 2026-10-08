@@ -1,6 +1,6 @@
 {
-  "count": 88,
-  "fetched_at": "2026-10-07T08:43:28+00:00",
+  "count": 87,
+  "fetched_at": "2026-10-08T09:01:49+00:00",
   "models": [
     {
       "family": "Claude",
@@ -18,6 +18,12 @@
       "family": "Claude",
       "free": false,
       "id": "claude-haiku-4-5",
+      "openai_compatible": false
+    },
+    {
+      "family": "Claude",
+      "free": false,
+      "id": "claude-haiku-5-5",
       "openai_compatible": false
     },
     {
@@ -90,12 +96,6 @@
       "family": "DeepSeek",
       "free": false,
       "id": "deepseek-v4-flash",
-      "openai_compatible": true
-    },
-    {
-      "family": "DeepSeek",
-      "free": true,
-      "id": "deepseek-v4-flash-free",
       "openai_compatible": true
     },
     {
@@ -444,12 +444,6 @@
       "family": "Other",
       "free": true,
       "id": "longcat-2.5-preview-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "mimo-v2.5-free",
       "openai_compatible": true
     },
     {
