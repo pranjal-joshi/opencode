@@ -1,6 +1,6 @@
 {
   "count": 87,
-  "fetched_at": "2026-10-08T09:01:49+00:00",
+  "fetched_at": "2026-10-09T09:09:06+00:00",
   "models": [
     {
       "family": "Claude",
@@ -412,12 +412,6 @@
     },
     {
       "family": "Other",
-      "free": true,
-      "id": "fledge-alpha-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
       "free": false,
       "id": "jev-1.13",
       "openai_compatible": true
@@ -498,6 +492,12 @@
       "family": "Other",
       "free": true,
       "id": "space-bunny-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "step-5-preview-free",
       "openai_compatible": true
     },
     {
