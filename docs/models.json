@@ -1,6 +1,6 @@
 {
-  "count": 83,
-  "fetched_at": "2026-10-12T09:16:39+00:00",
+  "count": 84,
+  "fetched_at": "2026-10-13T09:27:52+00:00",
   "models": [
     {
       "family": "Claude",
@@ -396,6 +396,12 @@
       "family": "Other",
       "free": true,
       "id": "big-pickle",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "cat-jam-free",
       "openai_compatible": true
     },
     {
