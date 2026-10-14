@@ -1,6 +1,6 @@
 {
-  "count": 84,
-  "fetched_at": "2026-10-13T09:27:52+00:00",
+  "count": 86,
+  "fetched_at": "2026-10-14T07:40:51+00:00",
   "models": [
     {
       "family": "Claude",
@@ -327,6 +327,12 @@
       "openai_compatible": false
     },
     {
+      "family": "Gemini",
+      "free": false,
+      "id": "gemini-4-argon",
+      "openai_compatible": false
+    },
+    {
       "family": "Grok",
       "free": false,
       "id": "grok-4.5",
@@ -480,6 +486,12 @@
       "family": "Other",
       "free": true,
       "id": "step-5-preview-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "test",
       "openai_compatible": true
     },
     {
