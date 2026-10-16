@@ -1,6 +1,6 @@
 {
-  "count": 86,
-  "fetched_at": "2026-10-15T07:29:16+00:00",
+  "count": 88,
+  "fetched_at": "2026-10-16T07:13:34+00:00",
   "models": [
     {
       "family": "Claude",
@@ -144,6 +144,12 @@
       "family": "GLM",
       "free": false,
       "id": "glm-5.3-flash",
+      "openai_compatible": true
+    },
+    {
+      "family": "GLM",
+      "free": true,
+      "id": "glm-5.3-flash-free",
       "openai_compatible": true
     },
     {
@@ -431,6 +437,12 @@
     {
       "family": "Other",
       "free": true,
+      "id": "ll-alpha-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
       "id": "longcat-2.5-preview-free",
       "openai_compatible": true
     },
@@ -479,13 +491,13 @@
     {
       "family": "Other",
       "free": true,
-      "id": "space-bunny-free",
+      "id": "nemotron-3.5-super-vl-free",
       "openai_compatible": true
     },
     {
       "family": "Other",
       "free": true,
-      "id": "step-5-preview-free",
+      "id": "space-bunny-free",
       "openai_compatible": true
     },
     {
