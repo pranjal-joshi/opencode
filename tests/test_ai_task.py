@@ -1,21 +1,45 @@
 """Test AI Task structured data generation."""
 
+from collections.abc import AsyncIterator, Callable
 from pathlib import Path
+from typing import Literal
 from unittest.mock import AsyncMock, patch
 
-from openai.types import CompletionUsage
-from openai.types.chat import ChatCompletion, ChatCompletionMessage
-from openai.types.chat.chat_completion import Choice
 import pytest
 import voluptuous as vol
-
 from homeassistant.components import ai_task, media_source
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
-from homeassistant.helpers import entity_registry as er, selector
+from homeassistant.helpers import entity_registry as er
+from homeassistant.helpers import selector
+from openai.types.chat import ChatCompletionChunk
+from openai.types.chat.chat_completion_chunk import Choice as ChunkChoice
+from openai.types.chat.chat_completion_chunk import ChoiceDelta
 
 from tests.common import MockConfigEntry
+
+
+def _chunk(
+    content: str | None = None,
+    *,
+    role: Literal["assistant"] | None = None,
+    finish_reason: str | None = None,
+) -> ChatCompletionChunk:
+    """Build a streaming chat completion chunk."""
+    return ChatCompletionChunk(
+        id="chatcmpl-1234567890ABCDEFGHIJKLMNOPQRS",
+        choices=[
+            ChunkChoice(
+                index=0,
+                delta=ChoiceDelta(role=role, content=content),
+                finish_reason=finish_reason,
+            )
+        ],
+        created=1700000000,
+        model="deepseek-v4-flash",
+        object="chat.completion.chunk",
+    )
 
 
 async def test_all_entities(
@@ -30,10 +54,7 @@ async def test_all_entities(
         await hass.config_entries.async_setup(mock_config_entry.entry_id)
         await hass.async_block_till_done()
 
-    assert (
-        hass.states.get("ai_task.deepseek_v4_flash").state
-        == "unavailable"
-    )
+    assert hass.states.get("ai_task.deepseek_v4_flash").state == "unavailable"
     assert entity_registry.async_get("ai_task.deepseek_v4_flash")
 
 
@@ -41,43 +62,24 @@ async def test_generate_data(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
     mock_openai_client: AsyncMock,
+    mock_stream: Callable[..., AsyncIterator[ChatCompletionChunk]],
 ) -> None:
     """Test AI Task data generation."""
     mock_config_entry.add_to_hass(hass)
     await hass.config_entries.async_setup(mock_config_entry.entry_id)
     await hass.async_block_till_done()
 
-    entity_id = "ai_task.deepseek_v4_flash"
-
     mock_openai_client.chat.completions.create = AsyncMock(
-        return_value=ChatCompletion(
-            id="chatcmpl-1234567890ABCDEFGHIJKLMNOPQRS",
-            choices=[
-                Choice(
-                    finish_reason="stop",
-                    index=0,
-                    message=ChatCompletionMessage(
-                        content="The test data",
-                        role="assistant",
-                        function_call=None,
-                        tool_calls=None,
-                    ),
-                )
-            ],
-            created=1700000000,
-            model="deepseek-v4-flash",
-            object="chat.completion",
-            system_fingerprint=None,
-            usage=CompletionUsage(
-                completion_tokens=9, prompt_tokens=8, total_tokens=17
-            ),
+        return_value=mock_stream(
+            _chunk(role="assistant", content="The test data"),
+            _chunk(finish_reason="stop"),
         )
     )
 
     result = await ai_task.async_generate_data(
         hass,
         task_name="Test Task",
-        entity_id=entity_id,
+        entity_id="ai_task.deepseek_v4_flash",
         instructions="Generate test data",
     )
 
@@ -88,6 +90,7 @@ async def test_generate_structured_data(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
     mock_openai_client: AsyncMock,
+    mock_stream: Callable[..., AsyncIterator[ChatCompletionChunk]],
 ) -> None:
     """Test AI Task structured data generation."""
     mock_config_entry.add_to_hass(hass)
@@ -95,27 +98,10 @@ async def test_generate_structured_data(
     await hass.async_block_till_done()
 
     mock_openai_client.chat.completions.create = AsyncMock(
-        return_value=ChatCompletion(
-            id="chatcmpl-1234567890ABCDEFGHIJKLMNOPQRS",
-            choices=[
-                Choice(
-                    finish_reason="stop",
-                    index=0,
-                    message=ChatCompletionMessage(
-                        content='{"characters": ["Mario", "Luigi"]}',
-                        role="assistant",
-                        function_call=None,
-                        tool_calls=None,
-                    ),
-                )
-            ],
-            created=1700000000,
-            model="deepseek-v4-flash",
-            object="chat.completion",
-            system_fingerprint=None,
-            usage=CompletionUsage(
-                completion_tokens=9, prompt_tokens=8, total_tokens=17
-            ),
+        return_value=mock_stream(
+            _chunk(role="assistant", content='{"characters": ['),
+            _chunk(content='"Mario", "Luigi"]}'),
+            _chunk(finish_reason="stop"),
         )
     )
 
@@ -163,6 +149,7 @@ async def test_generate_invalid_structured_data(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
     mock_openai_client: AsyncMock,
+    mock_stream: Callable[..., AsyncIterator[ChatCompletionChunk]],
 ) -> None:
     """Test AI Task with invalid JSON response."""
     mock_config_entry.add_to_hass(hass)
@@ -170,27 +157,9 @@ async def test_generate_invalid_structured_data(
     await hass.async_block_till_done()
 
     mock_openai_client.chat.completions.create = AsyncMock(
-        return_value=ChatCompletion(
-            id="chatcmpl-1234567890ABCDEFGHIJKLMNOPQRS",
-            choices=[
-                Choice(
-                    finish_reason="stop",
-                    index=0,
-                    message=ChatCompletionMessage(
-                        content="INVALID JSON RESPONSE",
-                        role="assistant",
-                        function_call=None,
-                        tool_calls=None,
-                    ),
-                )
-            ],
-            created=1700000000,
-            model="deepseek-v4-flash",
-            object="chat.completion",
-            system_fingerprint=None,
-            usage=CompletionUsage(
-                completion_tokens=9, prompt_tokens=8, total_tokens=17
-            ),
+        return_value=mock_stream(
+            _chunk(role="assistant", content="INVALID JSON RESPONSE"),
+            _chunk(finish_reason="stop"),
         )
     )
 
@@ -220,23 +189,14 @@ async def test_generate_data_empty_response(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
     mock_openai_client: AsyncMock,
+    mock_stream: Callable[..., AsyncIterator[ChatCompletionChunk]],
 ) -> None:
-    """Test AI Task raises HomeAssistantError when API returns empty choices."""
+    """Test AI Task raises HomeAssistantError when API returns an empty stream."""
     mock_config_entry.add_to_hass(hass)
     await hass.config_entries.async_setup(mock_config_entry.entry_id)
     await hass.async_block_till_done()
 
-    mock_openai_client.chat.completions.create = AsyncMock(
-        return_value=ChatCompletion(
-            id="chatcmpl-1234567890ABCDEFGHIJKLMNOPQRS",
-            choices=[],
-            created=1700000000,
-            model="deepseek-v4-flash",
-            object="chat.completion",
-            system_fingerprint=None,
-            usage=CompletionUsage(completion_tokens=0, prompt_tokens=8, total_tokens=8),
-        )
-    )
+    mock_openai_client.chat.completions.create = AsyncMock(return_value=mock_stream())
 
     with pytest.raises(HomeAssistantError, match="API returned empty response"):
         await ai_task.async_generate_data(
@@ -251,36 +211,17 @@ async def test_generate_data_with_attachments(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
     mock_openai_client: AsyncMock,
+    mock_stream: Callable[..., AsyncIterator[ChatCompletionChunk]],
 ) -> None:
     """Test AI Task data generation with attachments."""
     mock_config_entry.add_to_hass(hass)
     await hass.config_entries.async_setup(mock_config_entry.entry_id)
     await hass.async_block_till_done()
 
-    entity_id = "ai_task.deepseek_v4_flash"
-
     mock_openai_client.chat.completions.create = AsyncMock(
-        return_value=ChatCompletion(
-            id="chatcmpl-1234567890ABCDEFGHIJKLMNOPQRS",
-            choices=[
-                Choice(
-                    finish_reason="stop",
-                    index=0,
-                    message=ChatCompletionMessage(
-                        content="Hi there!",
-                        role="assistant",
-                        function_call=None,
-                        tool_calls=None,
-                    ),
-                )
-            ],
-            created=1700000000,
-            model="deepseek-v4-flash",
-            object="chat.completion",
-            system_fingerprint=None,
-            usage=CompletionUsage(
-                completion_tokens=9, prompt_tokens=8, total_tokens=17
-            ),
+        return_value=mock_stream(
+            _chunk(role="assistant", content="Hi there!"),
+            _chunk(finish_reason="stop"),
         )
     )
 
@@ -311,7 +252,7 @@ async def test_generate_data_with_attachments(
         result = await ai_task.async_generate_data(
             hass,
             task_name="Test Task",
-            entity_id=entity_id,
+            entity_id="ai_task.deepseek_v4_flash",
             instructions="Test prompt",
             attachments=[
                 {"media_content_id": "media-source://media/doorbell_snapshot.jpg"},

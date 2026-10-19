@@ -2,12 +2,13 @@
 
 import base64
 import json
-from collections.abc import AsyncGenerator, Callable
+from collections.abc import AsyncGenerator, AsyncIterator, Callable
 from mimetypes import guess_file_type
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
 import openai
+import voluptuous as vol
 from homeassistant.components import conversation
 from homeassistant.config_entries import ConfigSubentry
 from homeassistant.const import CONF_MODEL
@@ -19,6 +20,7 @@ from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.json import json_dumps
 from openai.types.chat import (
     ChatCompletionAssistantMessageParam,
+    ChatCompletionChunk,
     ChatCompletionContentPartImageParam,
     ChatCompletionFunctionToolParam,
     ChatCompletionMessage,
@@ -31,7 +33,6 @@ from openai.types.chat import (
 from openai.types.chat.chat_completion_message_function_tool_call_param import Function
 from openai.types.shared_params import FunctionDefinition, ResponseFormatJSONSchema
 from openai.types.shared_params.response_format_json_schema import JSONSchema
-import voluptuous as vol
 
 try:  # HA 2026.9+ replaced voluptuous-openapi with probatio in core requirements
     from probatio import to_openapi as convert
@@ -175,6 +176,58 @@ async def _transform_response(
     yield data
 
 
+async def _transform_stream(
+    stream: AsyncIterator[ChatCompletionChunk],
+) -> AsyncGenerator[conversation.AssistantContentDeltaDict]:
+    """Transform the OpenCode streaming response to a ChatLog format."""
+    tool_calls: dict[int, dict[str, Any]] = {}
+    role_sent = False
+    received_choices = False
+
+    async for chunk in stream:
+        if not chunk.choices:
+            continue
+
+        received_choices = True
+        delta = chunk.choices[0].delta
+
+        if not role_sent:
+            role_sent = True
+            yield {"role": "assistant"}
+
+        if delta.content:
+            yield {"content": delta.content}
+
+        for tool_call_delta in delta.tool_calls or []:
+            tool_call = tool_calls.setdefault(
+                tool_call_delta.index,
+                {"id": None, "name": None, "arguments": ""},
+            )
+            if tool_call_delta.id:
+                tool_call["id"] = tool_call_delta.id
+            if tool_call_delta.function:
+                if tool_call_delta.function.name:
+                    tool_call["name"] = tool_call_delta.function.name
+                if tool_call_delta.function.arguments:
+                    tool_call["arguments"] += tool_call_delta.function.arguments
+
+    if not received_choices:
+        LOGGER.error("API returned an empty stream")
+        raise HomeAssistantError("API returned empty response")
+
+    if tool_calls:
+        yield {
+            "tool_calls": [
+                llm.ToolInput(
+                    id=tool_call["id"],
+                    tool_name=tool_call["name"],
+                    tool_args=_decode_tool_arguments(tool_call["arguments"] or "{}"),
+                )
+                for _, tool_call in sorted(tool_calls.items())
+            ]
+        }
+
+
 async def async_prepare_files_for_prompt(
     hass: HomeAssistant, files: list[tuple[Path, str | None]]
 ) -> list[ChatCompletionContentPartImageParam]:
@@ -285,29 +338,56 @@ class OpenCodeEntity(Entity):
                 ),
             )
 
-        client = self.entry.runtime_data
+        use_stream = True
 
         for _iteration in range(MAX_TOOL_ITERATIONS):
-            try:
-                result = await client.chat.completions.create(**model_args)
-            except openai.OpenAIError as err:
-                LOGGER.error("Error talking to API: %s", err)
-                raise HomeAssistantError("Error talking to API") from err
-
-            if not result.choices:
-                LOGGER.error("API returned empty choices")
-                raise HomeAssistantError("API returned empty response")
-
-            result_message = result.choices[0].message
+            content_stream, use_stream = await self._async_request_content_stream(
+                model_args, use_stream
+            )
 
             model_args["messages"].extend(
                 [
                     msg
                     async for content in chat_log.async_add_delta_content_stream(
-                        self.entity_id, _transform_response(result_message)
+                        self.entity_id, content_stream
                     )
                     if (msg := _convert_content_to_chat_message(content))
                 ]
             )
             if not chat_log.unresponded_tool_results:
                 break
+
+    async def _async_request_content_stream(
+        self,
+        model_args: dict[str, Any],
+        use_stream: bool,
+    ) -> tuple[AsyncIterator[conversation.AssistantContentDeltaDict], bool]:
+        """Request a completion, streaming when supported.
+
+        Returns the content delta stream and whether streaming is still used.
+        """
+        client = self.entry.runtime_data
+
+        if use_stream:
+            try:
+                stream = await client.chat.completions.create(**model_args, stream=True)
+            except openai.OpenAIError as err:
+                LOGGER.warning(
+                    "Streaming is not supported by this model, retrying "
+                    "without it: %s",
+                    err,
+                )
+            else:
+                return _transform_stream(stream), True
+
+        try:
+            completion = await client.chat.completions.create(**model_args)
+        except openai.OpenAIError as err:
+            LOGGER.error("Error talking to API: %s", err)
+            raise HomeAssistantError("Error talking to API") from err
+
+        if not completion.choices:
+            LOGGER.error("API returned empty choices")
+            raise HomeAssistantError("API returned empty response")
+
+        return _transform_response(completion.choices[0].message), False

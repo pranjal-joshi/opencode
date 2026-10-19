@@ -58,6 +58,17 @@ jobs:
           files: opencode.zip
           name: "Release ${{ github.ref_name }}"
           body: |
+            ## ✨ Real token streaming
+
+            The conversation agent now streams responses token-by-token. Requests are
+            sent with `stream=True` and content deltas are forwarded to Home Assistant
+            as they arrive, so replies appear live in the conversation UI instead of
+            after the whole message has been generated. AI Task (structured data)
+            requests stream as well.
+
+            If a model or provider does not support streaming, the integration
+            automatically retries the request without streaming, so nothing breaks.
+
             ## 🐛 Bug Fixes
 
             ### Home Assistant 2026.9 compatibility
@@ -80,10 +91,4 @@ jobs:
 
             No configuration changes are required — update and restart Home Assistant.
 
-            ## 🔁 Upgrading from v1.0.0
-
-            If you are on Home Assistant 2026.9+, v1.0.0 will not start at all. Update
-            through HACS and restart; your existing agents and AI task subentries are
-            preserved.
-
-            **Full Changelog**: https://github.com/pranjal-joshi/opencode/compare/v1.0.0...${{ github.ref_name }}
+            **Full Changelog**: https://github.com/pranjal-joshi/opencode/compare/v1.0.1...${{ github.ref_name }}

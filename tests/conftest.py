@@ -1,7 +1,7 @@
 """Fixtures for OpenCode integration tests."""
 
-from collections.abc import AsyncGenerator, Generator
-from typing import Any
+from collections.abc import AsyncGenerator, AsyncIterator, Callable, Generator
+from typing import Any, Literal
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -16,11 +16,40 @@ from homeassistant.const import (
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import llm
 from homeassistant.setup import async_setup_component
-from openai.types import CompletionUsage
-from openai.types.chat import ChatCompletion, ChatCompletionMessage
-from openai.types.chat.chat_completion import Choice
+from openai.types.chat import ChatCompletionChunk
+from openai.types.chat.chat_completion_chunk import Choice as ChunkChoice
+from openai.types.chat.chat_completion_chunk import ChoiceDelta
 
 from tests.common import MockConfigEntry
+
+
+def _make_chunk(
+    content: str | None = None,
+    *,
+    role: Literal["assistant"] | None = None,
+    tool_calls: list[Any] | None = None,
+    finish_reason: str | None = None,
+) -> ChatCompletionChunk:
+    """Build a streaming chat completion chunk."""
+    return ChatCompletionChunk(
+        id="chatcmpl-1234567890ABCDEFGHIJKLMNOPQRS",
+        choices=[
+            ChunkChoice(
+                index=0,
+                delta=ChoiceDelta(role=role, content=content, tool_calls=tool_calls),
+                finish_reason=finish_reason,
+            )
+        ],
+        created=1700000000,
+        model="deepseek-v4-flash",
+        object="chat.completion.chunk",
+    )
+
+
+async def _stream(*chunks: ChatCompletionChunk) -> AsyncIterator[ChatCompletionChunk]:
+    """Yield chat completion chunks as an asynchronous stream."""
+    for chunk in chunks:
+        yield chunk
 
 
 @pytest.fixture
@@ -105,32 +134,26 @@ def openai_compatible_model_ids() -> list[str]:
 
 
 @pytest.fixture
+def mock_stream() -> Callable[..., AsyncIterator[ChatCompletionChunk]]:
+    """Return a factory for asynchronous chat completion streams."""
+
+    def _make_stream(
+        *chunks: ChatCompletionChunk,
+    ) -> AsyncIterator[ChatCompletionChunk]:
+        return _stream(*chunks)
+
+    return _make_stream
+
+
+@pytest.fixture
 async def mock_openai_client() -> AsyncGenerator[AsyncMock]:
     """Initialize integration with a mocked OpenAI client."""
     with patch("custom_components.opencode.AsyncOpenAI") as mock_client:
         client = mock_client.return_value
         client.chat.completions.create = AsyncMock(
-            return_value=ChatCompletion(
-                id="chatcmpl-1234567890ABCDEFGHIJKLMNOPQRS",
-                choices=[
-                    Choice(
-                        finish_reason="stop",
-                        index=0,
-                        message=ChatCompletionMessage(
-                            content="Hello, how can I help you?",
-                            role="assistant",
-                            function_call=None,
-                            tool_calls=None,
-                        ),
-                    )
-                ],
-                created=1700000000,
-                model="deepseek-v4-flash",
-                object="chat.completion",
-                system_fingerprint=None,
-                usage=CompletionUsage(
-                    completion_tokens=9, prompt_tokens=8, total_tokens=17
-                ),
+            return_value=_stream(
+                _make_chunk(role="assistant", content="Hello, how can I help you?"),
+                _make_chunk(finish_reason="stop"),
             )
         )
         yield client
