@@ -1,6 +1,6 @@
 {
   "count": 85,
-  "fetched_at": "2026-10-19T07:50:05+00:00",
+  "fetched_at": "2026-10-20T07:37:39+00:00",
   "models": [
     {
       "family": "Claude",
@@ -411,6 +411,12 @@
       "openai_compatible": true
     },
     {
+      "family": "MiniMax",
+      "free": true,
+      "id": "minimax-m3.1-flash-free",
+      "openai_compatible": true
+    },
+    {
       "family": "Other",
       "free": true,
       "id": "beam-free",
@@ -474,12 +480,6 @@
       "family": "Other",
       "free": true,
       "id": "nemotron-3.5-super-vl-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "space-bunny-free",
       "openai_compatible": true
     },
     {
