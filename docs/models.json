@@ -1,6 +1,6 @@
 {
   "count": 86,
-  "fetched_at": "2026-10-21T07:42:11+00:00",
+  "fetched_at": "2026-10-22T07:37:55+00:00",
   "models": [
     {
       "family": "Claude",
@@ -430,6 +430,12 @@
     },
     {
       "family": "Other",
+      "free": true,
+      "id": "flint-40b-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
       "free": false,
       "id": "jev-1.13",
       "openai_compatible": true
@@ -438,12 +444,6 @@
       "family": "Other",
       "free": true,
       "id": "jev-1.13-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "longcat-2.5-preview-free",
       "openai_compatible": true
     },
     {
