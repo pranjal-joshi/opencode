@@ -1,6 +1,6 @@
 {
-  "count": 86,
-  "fetched_at": "2026-10-22T07:37:55+00:00",
+  "count": 85,
+  "fetched_at": "2026-10-23T07:35:02+00:00",
   "models": [
     {
       "family": "Claude",
@@ -408,12 +408,6 @@
       "family": "MiniMax",
       "free": false,
       "id": "minimax-m3",
-      "openai_compatible": true
-    },
-    {
-      "family": "MiniMax",
-      "free": true,
-      "id": "minimax-m3.1-flash-free",
       "openai_compatible": true
     },
     {
