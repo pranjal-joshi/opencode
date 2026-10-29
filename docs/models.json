@@ -1,6 +1,6 @@
 {
-  "count": 84,
-  "fetched_at": "2026-10-28T08:36:57+00:00",
+  "count": 83,
+  "fetched_at": "2026-10-29T08:33:04+00:00",
   "models": [
     {
       "family": "Claude",
@@ -474,12 +474,6 @@
       "family": "Other",
       "free": true,
       "id": "nemotron-3.5-super-vl-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": false,
-      "id": "test",
       "openai_compatible": true
     },
     {
