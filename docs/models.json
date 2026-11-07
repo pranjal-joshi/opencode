@@ -1,6 +1,6 @@
 {
-  "count": 80,
-  "fetched_at": "2026-11-06T09:27:18+00:00",
+  "count": 81,
+  "fetched_at": "2026-11-07T08:50:03+00:00",
   "models": [
     {
       "family": "Claude",
@@ -413,6 +413,18 @@
     {
       "family": "Other",
       "free": true,
+      "id": "iceman-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "inkling-2-small-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
       "id": "mimo-v2.6-flash-free",
       "openai_compatible": true
     },
@@ -450,12 +462,6 @@
       "family": "Other",
       "free": true,
       "id": "nemotron-3.5-super-vl-free",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "pulse-alpha-free",
       "openai_compatible": true
     },
     {
