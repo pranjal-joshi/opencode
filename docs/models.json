@@ -1,6 +1,6 @@
 {
-  "count": 81,
-  "fetched_at": "2026-11-09T09:51:26+00:00",
+  "count": 84,
+  "fetched_at": "2026-11-10T09:54:47+00:00",
   "models": [
     {
       "family": "Claude",
@@ -12,6 +12,12 @@
       "family": "Claude",
       "free": false,
       "id": "claude-fable-5-1",
+      "openai_compatible": false
+    },
+    {
+      "family": "Claude",
+      "free": false,
+      "id": "claude-fable-5-2",
       "openai_compatible": false
     },
     {
@@ -387,6 +393,12 @@
       "openai_compatible": true
     },
     {
+      "family": "MiniMax",
+      "free": true,
+      "id": "minimax-m3.1-flash-free",
+      "openai_compatible": true
+    },
+    {
       "family": "Other",
       "free": true,
       "id": "beam-free",
@@ -396,12 +408,6 @@
       "family": "Other",
       "free": true,
       "id": "big-pickle",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "crouton-alpha-free",
       "openai_compatible": true
     },
     {
@@ -425,6 +431,12 @@
     {
       "family": "Other",
       "free": true,
+      "id": "longcat-2.5-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
       "id": "mimo-v2.6-flash-free",
       "openai_compatible": true
     },
@@ -432,6 +444,12 @@
       "family": "Other",
       "free": false,
       "id": "mistral-large-4",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "muse-ember-1.0",
       "openai_compatible": true
     },
     {
