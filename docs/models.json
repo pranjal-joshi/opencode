@@ -1,6 +1,6 @@
 {
-  "count": 84,
-  "fetched_at": "2026-11-10T09:54:47+00:00",
+  "count": 85,
+  "fetched_at": "2026-11-11T09:29:00+00:00",
   "models": [
     {
       "family": "Claude",
@@ -324,6 +324,12 @@
       "family": "Gemini",
       "free": false,
       "id": "gemini-4-argon",
+      "openai_compatible": false
+    },
+    {
+      "family": "Gemini",
+      "free": false,
+      "id": "gemini-4-carbon",
       "openai_compatible": false
     },
     {
