@@ -1,6 +1,6 @@
 {
-  "count": 86,
-  "fetched_at": "2026-11-15T09:30:03+00:00",
+  "count": 87,
+  "fetched_at": "2026-11-16T09:48:53+00:00",
   "models": [
     {
       "family": "Claude",
@@ -426,6 +426,12 @@
       "family": "Other",
       "free": true,
       "id": "flint-40b-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": true,
+      "id": "hy4-flash-free",
       "openai_compatible": true
     },
     {
