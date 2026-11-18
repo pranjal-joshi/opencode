@@ -1,6 +1,6 @@
 {
-  "count": 86,
-  "fetched_at": "2026-11-17T10:46:07+00:00",
+  "count": 87,
+  "fetched_at": "2026-11-18T10:13:40+00:00",
   "models": [
     {
       "family": "Claude",
@@ -138,12 +138,6 @@
       "family": "GLM",
       "free": false,
       "id": "glm-5.3-flash",
-      "openai_compatible": true
-    },
-    {
-      "family": "GLM",
-      "free": true,
-      "id": "glm-5.3-flash-free",
       "openai_compatible": true
     },
     {
@@ -288,6 +282,18 @@
       "family": "GPT",
       "free": false,
       "id": "gpt-6.1-sol",
+      "openai_compatible": false
+    },
+    {
+      "family": "GPT",
+      "free": false,
+      "id": "gpt-6.2-astra",
+      "openai_compatible": false
+    },
+    {
+      "family": "GPT",
+      "free": false,
+      "id": "gpt-6.2-sol",
       "openai_compatible": false
     },
     {
