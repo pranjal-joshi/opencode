@@ -1,6 +1,6 @@
 {
-  "count": 84,
-  "fetched_at": "2026-11-19T10:24:53+00:00",
+  "count": 103,
+  "fetched_at": "2026-11-20T10:04:43+00:00",
   "models": [
     {
       "family": "Claude",
@@ -257,6 +257,12 @@
     {
       "family": "GPT",
       "free": false,
+      "id": "gpt-6-luna-decision",
+      "openai_compatible": false
+    },
+    {
+      "family": "GPT",
+      "free": false,
       "id": "gpt-6-sol",
       "openai_compatible": false
     },
@@ -276,6 +282,18 @@
       "family": "GPT",
       "free": false,
       "id": "gpt-6.2-sol",
+      "openai_compatible": false
+    },
+    {
+      "family": "GPT",
+      "free": false,
+      "id": "gpt-image-2.5-sunburst",
+      "openai_compatible": false
+    },
+    {
+      "family": "GPT",
+      "free": false,
+      "id": "gpt-live-1",
       "openai_compatible": false
     },
     {
@@ -333,6 +351,30 @@
       "openai_compatible": false
     },
     {
+      "family": "Gemini",
+      "free": false,
+      "id": "gemini-decision-1",
+      "openai_compatible": false
+    },
+    {
+      "family": "Gemini",
+      "free": false,
+      "id": "gemini-embedding-001",
+      "openai_compatible": false
+    },
+    {
+      "family": "Gemini",
+      "free": false,
+      "id": "gemini-embedding-2",
+      "openai_compatible": false
+    },
+    {
+      "family": "Gemini",
+      "free": false,
+      "id": "gemini-nano-banana-2.1",
+      "openai_compatible": false
+    },
+    {
       "family": "Grok",
       "free": false,
       "id": "grok-4.5",
@@ -354,6 +396,12 @@
       "family": "Grok",
       "free": false,
       "id": "grok-build-0.1",
+      "openai_compatible": false
+    },
+    {
+      "family": "Grok",
+      "free": false,
+      "id": "grok-imagine-image-2.0",
       "openai_compatible": false
     },
     {
@@ -394,8 +442,32 @@
     },
     {
       "family": "Other",
+      "free": false,
+      "id": "bge-m3",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
       "free": true,
       "id": "big-pickle",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "codestral-embed",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "cohere-embed-v5-fast",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "cohere-embed-v5-pro",
       "openai_compatible": true
     },
     {
@@ -418,8 +490,14 @@
     },
     {
       "family": "Other",
+      "free": false,
+      "id": "jev-1.13",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
       "free": true,
-      "id": "inkling-2-small-free",
+      "id": "jev-1.13-free",
       "openai_compatible": true
     },
     {
@@ -432,6 +510,12 @@
       "family": "Other",
       "free": true,
       "id": "mimo-v2.6-flash-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "mistral-embed",
       "openai_compatible": true
     },
     {
@@ -478,9 +562,39 @@
     },
     {
       "family": "Other",
+      "free": false,
+      "id": "text-embedding-3-large",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "text-embedding-3-small",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
       "free": true,
       "id": "tidepool-alpha-free",
       "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "voyage-4",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
+      "free": false,
+      "id": "voyage-code-4",
+      "openai_compatible": true
+    },
+    {
+      "family": "Qwen",
+      "free": false,
+      "id": "qwen3-embedding-8b",
+      "openai_compatible": false
     },
     {
       "family": "Qwen",
