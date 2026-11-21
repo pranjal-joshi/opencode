@@ -1,6 +1,6 @@
 {
-  "count": 103,
-  "fetched_at": "2026-11-20T10:04:43+00:00",
+  "count": 104,
+  "fetched_at": "2026-11-21T09:53:03+00:00",
   "models": [
     {
       "family": "Claude",
@@ -372,6 +372,12 @@
       "family": "Gemini",
       "free": false,
       "id": "gemini-nano-banana-2.1",
+      "openai_compatible": false
+    },
+    {
+      "family": "Gemini",
+      "free": false,
+      "id": "gemini-omni-1.2-flash",
       "openai_compatible": false
     },
     {
