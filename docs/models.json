@@ -1,6 +1,6 @@
 {
-  "count": 105,
-  "fetched_at": "2026-11-22T09:49:33+00:00",
+  "count": 106,
+  "fetched_at": "2026-11-23T10:49:37+00:00",
   "models": [
     {
       "family": "Claude",
@@ -514,8 +514,8 @@
     },
     {
       "family": "Other",
-      "free": true,
-      "id": "longcat-2.5-free",
+      "free": false,
+      "id": "jev-1.14",
       "openai_compatible": true
     },
     {
@@ -630,6 +630,12 @@
       "family": "Qwen",
       "free": false,
       "id": "qwen3.8-max",
+      "openai_compatible": false
+    },
+    {
+      "family": "Qwen",
+      "free": true,
+      "id": "qwen4-max-free",
       "openai_compatible": false
     }
   ],
