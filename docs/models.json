@@ -1,6 +1,6 @@
 {
-  "count": 106,
-  "fetched_at": "2026-11-23T10:49:37+00:00",
+  "count": 108,
+  "fetched_at": "2026-11-24T12:32:33+00:00",
   "models": [
     {
       "family": "Claude",
@@ -417,6 +417,18 @@
       "openai_compatible": false
     },
     {
+      "family": "Grok",
+      "free": false,
+      "id": "grok-imagine-video-1.5",
+      "openai_compatible": false
+    },
+    {
+      "family": "Grok",
+      "free": false,
+      "id": "grok-imagine-video-1.5-lite",
+      "openai_compatible": false
+    },
+    {
       "family": "Kimi",
       "free": false,
       "id": "kimi-k2.7-code",
@@ -426,6 +438,12 @@
       "family": "Kimi",
       "free": false,
       "id": "kimi-k3",
+      "openai_compatible": true
+    },
+    {
+      "family": "Kimi",
+      "free": false,
+      "id": "kimi-k3.1-pro",
       "openai_compatible": true
     },
     {
@@ -630,12 +648,6 @@
       "family": "Qwen",
       "free": false,
       "id": "qwen3.8-max",
-      "openai_compatible": false
-    },
-    {
-      "family": "Qwen",
-      "free": true,
-      "id": "qwen4-max-free",
       "openai_compatible": false
     }
   ],
