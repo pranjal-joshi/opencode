@@ -1,6 +1,6 @@
 {
   "count": 108,
-  "fetched_at": "2026-11-25T11:21:57+00:00",
+  "fetched_at": "2026-11-26T10:57:30+00:00",
   "models": [
     {
       "family": "Claude",
@@ -592,6 +592,12 @@
     },
     {
       "family": "Other",
+      "free": true,
+      "id": "seaglass-alpha-free",
+      "openai_compatible": true
+    },
+    {
+      "family": "Other",
       "free": false,
       "id": "text-embedding-3-large",
       "openai_compatible": true
@@ -600,12 +606,6 @@
       "family": "Other",
       "free": false,
       "id": "text-embedding-3-small",
-      "openai_compatible": true
-    },
-    {
-      "family": "Other",
-      "free": true,
-      "id": "tidepool-alpha-free",
       "openai_compatible": true
     },
     {
