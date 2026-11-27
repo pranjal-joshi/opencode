@@ -1,6 +1,6 @@
 {
-  "count": 108,
-  "fetched_at": "2026-11-26T10:57:30+00:00",
+  "count": 110,
+  "fetched_at": "2026-11-27T10:55:17+00:00",
   "models": [
     {
       "family": "Claude",
@@ -303,6 +303,12 @@
       "openai_compatible": false
     },
     {
+      "family": "GPT",
+      "free": false,
+      "id": "gpt-transcribe",
+      "openai_compatible": false
+    },
+    {
       "family": "Gemini",
       "free": false,
       "id": "gemini-3.5-flash",
@@ -426,6 +432,12 @@
       "family": "Grok",
       "free": false,
       "id": "grok-imagine-video-1.5-lite",
+      "openai_compatible": false
+    },
+    {
+      "family": "Grok",
+      "free": false,
+      "id": "grok-voice-transcribe-2.0",
       "openai_compatible": false
     },
     {
